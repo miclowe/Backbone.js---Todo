@@ -43,6 +43,11 @@ $(document).ready(function(){
     events: {
       'click .checkbox': function() {
         this.model.toggle();
+        if(this.model.get('complete')) {
+          $('#todo-list').append(this.render().el);
+        } else {
+          $('#incomplete-todo-list').append(this.render().el);
+        }
       }
     },
     render: function() {
@@ -66,7 +71,7 @@ $(document).ready(function(){
       this.counter = this.$('#counter');
       this.listenTo(Todos, 'add', function(todo) {
         var view = new TodoView({model: todo});
-        // this.$('#todo-list').append(view.render().el);
+        // this.$('#incomplete-todo-list').append(view.render().el);
         if (todo.get('complete')) {
           this.$('#todo-list').append(view.render().el);
         } else {
